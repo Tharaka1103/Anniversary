@@ -160,7 +160,7 @@ export default function HomePage() {
                 <Sparkles className="h-5 w-5" /> Happy 5th Anniversary, Manika! ❤️
                 </AlertTitle>
                 <AlertDescription className="text-pink-600">
-                My dearest Manika, these past 5 years have been the most beautiful journey of my life. Every smile, every moment with you makes my world complete. I love you more and more with each passing day. When you need help, I'll always be there by your side, ready to support you through thick and thin. I promise to take care of you every moment, protect you, and cherish you forever pana. Your happiness is my priority, and seeing you smile brightens my entire world. I love you today, tomorrow, and for all the days to come. Here's to many more years of love, happiness, and endless adventures together, my precious Pana podda.
+                My dearest Manika, these past 5 years have been the most beautiful journey of my life. Every smile, every moment with you makes my world complete. I love you more and more with each passing day. When you need help, I will always be there by your side, ready to support you through thick and thin. I promise to take care of you every moment, protect you, and cherish you forever pana. Your happiness is my priority, and seeing you smile brightens my entire world. I love you today, tomorrow, and for all the days to come. Here is to many more years of love, happiness, and endless adventures together, my precious Pana podda.
                 </AlertDescription>                
                 <Button
                 variant="ghost"
@@ -207,7 +207,7 @@ export default function HomePage() {
         Virtual Kisses
       </AlertDialogTitle>
       <AlertDialogDescription className="text-pink-500">
-        Send a virtual kiss to your loved one! You've sent {kissCount} kisses so far.
+        Send a virtual kiss to your loved one! You havve sent {kissCount} kisses so far.
       </AlertDialogDescription>
     </AlertDialogHeader>
     <div className="flex justify-center py-4">

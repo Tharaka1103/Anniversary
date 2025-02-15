@@ -106,13 +106,13 @@ const FallingHearts = () => {
 }
 
 // Utility function for debounce
-const debounce = (func: (...args: any[]) => void, wait: number) => {
-  let timeout: NodeJS.Timeout
-  return (...args: any[]) => {
-    clearTimeout(timeout)
-    timeout = setTimeout(() => func(...args), wait)
-  }
-}
+const debounce = (func: Function, wait: number) => {
+    let timeout: NodeJS.Timeout
+    return (...args: unknown[]) => {
+      clearTimeout(timeout)
+      timeout = setTimeout(() => func(...args), wait)
+    }
+  }  
 
 // HeartIcon component with improved SVG
 const HeartIcon = ({ size, className }: { size: number; className?: string }) => (
