@@ -5,10 +5,22 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { HeartIcon, Clock, Calendar, Gift, Sparkles, X, ChevronLeftIcon, ChevronRightIcon, SearchIcon } from 'lucide-react'
+import { HeartIcon, Sparkles, X, ChevronLeftIcon, ChevronRightIcon, SearchIcon } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTheme } from 'next-themes'
 import FallingHearts from '@/components/FallingHearts'
+import Image from 'next/image'
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import confetti from 'canvas-confetti'
+
 // Image gallery data
 const images = [
   '/images/image1.jpg',
@@ -99,6 +111,7 @@ export default function HomePage() {
   const [showTimeoutWarning, setShowTimeoutWarning] = useState(true)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
+  const [kissCount, setKissCount] = useState(0)
 
   // Preloader
   useEffect(() => {
@@ -147,8 +160,8 @@ export default function HomePage() {
                 <Sparkles className="h-5 w-5" /> Happy 5th Anniversary, Manika! ❤️
                 </AlertTitle>
                 <AlertDescription className="text-pink-600">
-                My dearest Manika, these past 5 years have been the most beautiful journey of my life. Every smile, every moment with you makes my world complete. Here's to many more years of love and happiness together.
-                </AlertDescription>
+                My dearest Manika, these past 5 years have been the most beautiful journey of my life. Every smile, every moment with you makes my world complete. I love you more and more with each passing day. When you need help, I'll always be there by your side, ready to support you through thick and thin. I promise to take care of you every moment, protect you, and cherish you forever pana. Your happiness is my priority, and seeing you smile brightens my entire world. I love you today, tomorrow, and for all the days to come. Here's to many more years of love, happiness, and endless adventures together, my precious Pana podda.
+                </AlertDescription>                
                 <Button
                 variant="ghost"
                 size="icon"
@@ -178,16 +191,62 @@ export default function HomePage() {
           </Avatar>
           <h3 className="font-semibold">Tharushi Sanjula</h3>
         </div>
-        <HeartIcon className="w-8 h-8 text-primary animate-pulse" />
-        <div className="text-center">
+        <AlertDialog>
+  <AlertDialogTrigger>
+    <HeartIcon className="w-8 h-8 text-primary animate-pulse hover:scale-110 transition-transform cursor-pointer" />
+  </AlertDialogTrigger>
+  <AlertDialogContent className="bg-pink-50 border-pink-200">
+    <AlertDialogHeader>
+      <AlertDialogTitle className="text-2xl text-pink-600 flex items-center gap-2">
+        <motion.div
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+        >
+          💋
+        </motion.div>
+        Virtual Kisses
+      </AlertDialogTitle>
+      <AlertDialogDescription className="text-pink-500">
+        Send a virtual kiss to your loved one! You've sent {kissCount} kisses so far.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <div className="flex justify-center py-4">
+      <motion.div
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <Button
+          onClick={() => {
+            setKissCount(prev => prev + 1)
+            confetti({
+              particleCount: 100,
+              spread: 70,
+              origin: { y: 0.6 }
+            })
+          }}
+          className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full"
+        >
+          Send a Kiss 💋
+        </Button>
+      </motion.div>
+    </div>
+    <AlertDialogFooter>
+      <AlertDialogCancel className="border-pink-200 text-pink-600 hover:bg-pink-100">
+        Close
+      </AlertDialogCancel>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>        
+<div className="text-center">
           <Avatar className="w-24 h-24 mb-4">
             <AvatarImage src="/images/partner2.jpg" />
             <AvatarFallback>P2</AvatarFallback>
           </Avatar>
           <h3 className="font-semibold">Supun Tharaka</h3>
         </div>
-      </div>      {/* Time Counter */}
-      <Card className="mb-8 bg-card/50 backdrop-blur-sm">
+      </div>      
+      {/* Time Counter */}
+      <Card className="mb-8 mt-10 bg-card/50 backdrop-blur-sm">
         <CardHeader>
           <CardTitle className="text-center">Time Together</CardTitle>
         </CardHeader>
@@ -229,8 +288,10 @@ export default function HomePage() {
                 className="group relative aspect-square rounded-lg overflow-hidden cursor-pointer"
                 onClick={() => setSelectedImage(image)}
               >
-                <img
+                <Image
                   src={image}
+                  width={500}
+                  height={500}
                   alt={`Memory ${index + 1}`}
                   className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
                 />
@@ -304,8 +365,10 @@ export default function HomePage() {
                 >
                   <X className="h-4 w-4" />
                 </Button>
-                <img
+                <Image
                   src={selectedImage}
+                  width={500}
+                  height={500}
                   alt="Fullscreen view"
                   className="rounded-lg object-contain max-h-[90vh] w-auto"
                 />

@@ -9,9 +9,9 @@ body {
 
 @layer base {
   :root {
-    --background: #f9d3e2;
+    --background: #fff7fa;
     --foreground: #0A0A0B;
-    --card: #f992aa;
+    --card: #ffd5df;
     --card-foreground: #0A0A0B;
     --popover: #FFFFFF;
     --popover-foreground: #0A0A0B;
